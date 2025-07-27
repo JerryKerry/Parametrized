@@ -1,3 +1,4 @@
+import com.codeborne.selenide.Selenide;
 import helper.LanguageHelper;
 import com.codeborne.selenide.Configuration;
 import data.EnumLanguageHosting;
@@ -27,10 +28,15 @@ public class HostingLanguageTest extends LanguageHelper {
         Configuration.pageLoadTimeout = 100000;
     }
 
+    @AfterEach
+    void afterEach() {
+        Selenide.closeWebDriver();
+    }
+
     @EnumSource(EnumLanguageHosting.class)
     @ParameterizedTest
     @Tag("Smoke")
-    void EnumLanguageHosting(EnumLanguageHosting language) {
+    void enumLanguageHostingTest(EnumLanguageHosting language) {
         $("span.wglanguage-name").hover().click();
         $$("ul li a").findBy(text(language.name)).click();
         $("#dedicatedServersDropDown").shouldHave(text(language.button));
@@ -39,7 +45,7 @@ public class HostingLanguageTest extends LanguageHelper {
     @ValueSource(strings = {"Nederlands","Español"})
     @ParameterizedTest
     @Tag("Smoke")
-    void valueSourceLanguages(String language) {
+    void valueSourceLanguagesTest(String language) {
         $("span.wglanguage-name").hover().click();
         $$("ul li a").findBy(text(language)).click();
         $("span.wglanguage-name").shouldHave(text(language));
@@ -48,7 +54,7 @@ public class HostingLanguageTest extends LanguageHelper {
     @MethodSource("languageDropDown")
     @ParameterizedTest
     @Tag("Smoke")
-    void hostingLanguageDropDown(String language, List<String> buttonsRent){
+    void hostingLanguageDropDownTest(String language, List<String> buttonsRent){
         $("span.wglanguage-name").hover().click();
         $$("ul li a").findBy(text(language)).click();
         List<String>  actualItems  = $$("#navbarNavDropdown > ul > li > a")
