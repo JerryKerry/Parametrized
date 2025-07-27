@@ -39,7 +39,7 @@ public class HostingLanguageTest extends LanguageHelper {
     @ValueSource(strings = {"Nederlands","Español"})
     @ParameterizedTest
     @Tag("Smoke")
-    void mailPrivateAndBusinessClient(String language) {
+    void valueSourceLanguages(String language) {
         $("span.wglanguage-name").hover().click();
         $$("ul li a").findBy(text(language)).click();
         $("span.wglanguage-name").shouldHave(text(language));
