@@ -1,4 +1,4 @@
-import Helper.LanguageHelper;
+import helper.LanguageHelper;
 import com.codeborne.selenide.Configuration;
 import data.EnumLanguageHosting;
 import org.junit.jupiter.api.*;

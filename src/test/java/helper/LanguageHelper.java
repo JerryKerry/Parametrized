@@ -1,4 +1,4 @@
-package Helper;
+package helper;
 
 import org.junit.jupiter.params.provider.Arguments;
 
